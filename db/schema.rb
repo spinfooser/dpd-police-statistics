@@ -15,7 +15,8 @@ ActiveRecord::Schema.define(version: 2020_08_14_171547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "complaints", primary_key: "incident_id", id: :string, force: :cascade do |t|
+  create_table "complaints", force: :cascade do |t|
+    t.string "incident_id"
     t.string "incident_type", null: false
     t.date "received_date", null: false
     t.date "completed_date"

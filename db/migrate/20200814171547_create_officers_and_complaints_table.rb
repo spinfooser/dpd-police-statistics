@@ -11,8 +11,8 @@ class CreateOfficersAndComplaintsTable < ActiveRecord::Migration[6.0]
       t.boolean :transferred, null: false
     end
 
-    create_table :complaints, id: false, primary_key: :incident_id do |t|
-      t.primary_key :incident_id, :string
+    create_table :complaints do |t|
+      t.string :incident_id
       t.string :incident_type, null: false
       t.date :received_date, null: false
       t.date :completed_date, null: true

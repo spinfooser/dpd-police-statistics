@@ -30,10 +30,30 @@ class CsvParserService
   end
 
   def parse_complaint_csv(csv_file_path)
+    SmarterCSV.process(csv_file_path) do |chunk|
+      complaint = chunk.first
+      received_date = Date.strptime(complaint[:received_date], '%Y.%m.%d') if complaint[:received_date].present?
+      completed_date = Date.strptime(complaint[:completed_date], '%Y.%m.%d') if complaint[:completed_date].present?
 
-    complaints_file = File.new(Rails.root.join('data_files', 'citizen_complaints.csv'))
-    complaints_array = SmarterCSV.process(complaints_file.path)
-    pp complaints_array.first
+      officer = Officer.where(id: complaint[:badge]).first if complaint[:badge]
+      if complaint[:disposition] == 'Decline'
+        complaint[:disposition] = 'Declined'
+      end
+      Complaint.create!(
+          incident_id: complaint[:incident_id],
+          incident_type: complaint[:incident_type],
+          received_date: received_date,
+          completed_date: completed_date,
+          last_name: complaint[:last_name],
+          first_name: complaint[:first_name],
+          officer_id: officer&.id,
+          allegation: complaint[:allegation],
+          directive: complaint[:directive],
+          finding: complaint[:finding],
+          action_taken: complaint[:action_taken],
+          disposition: complaint[:disposition]
+      )
+    end
   end
 
 end
