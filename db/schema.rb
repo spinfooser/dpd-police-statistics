@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_08_14_171547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "complaints", primary_key: "incident_id", id: :string, force: :cascade do |t|
+    t.string "incident_type", null: false
+    t.date "received_date", null: false
+    t.date "completed_date"
+    t.string "last_name"
+    t.string "first_name"
+    t.string "allegation"
+    t.string "directive"
+    t.string "finding"
+    t.string "action_taken"
+    t.string "disposition"
+    t.string "officer_id"
+    t.index ["officer_id"], name: "index_complaints_on_officer_id"
+  end
+
+  create_table "officers", id: :string, force: :cascade do |t|
+    t.string "employee_id"
+    t.string "name", null: false
+    t.string "job_profile", null: false
+    t.boolean "active", null: false
+    t.date "termination_date"
+    t.date "rehire_date"
+    t.boolean "transferred", null: false
+  end
+
+  add_foreign_key "complaints", "officers"
 end

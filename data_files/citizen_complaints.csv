@@ -1,4 +1,4 @@
-IA No, Incident type, Received date, Completed date, Last name, First name, Badge, Allegation, Directive, Finding, Action taken, Disposition,,,,,,,,,,,
+incident_id,incident_type,received_date,completed_date,last_name,first_name,badge,allegation,directive,finding,action_taken,disposition,,,,,,,,,,,
 P2010-01020, Citizen Complaint, 2010.01.08, 2010.01.08, , , , zRR127 - Responsibilities To Serve The Public, z, Decline - Judicial/Remedy, , Decline, , , , , , , , , , , 
 P2010-01035, Citizen Complaint, 2010.01.11, 2010.01.28, , , , zRR127 - Responsibilities To Serve The Public, z, Decline - Third Party, , Decline, , , , , , , , , , , 
 P2010-01062, Citizen Complaint, 2010.01.22, 2010.02.21, , , , zRR140 - Discourtesy, z, Decline - Mediation, , Decline, , , , , , , , , , , 
