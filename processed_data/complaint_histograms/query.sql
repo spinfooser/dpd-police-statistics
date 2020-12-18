@@ -1,5 +1,13 @@
-select officer_id, count(officer_id) as complaint_count from officers
-join complaints c on officers.id = c.officer_id
-where active = true
-group by officer_id
-order by count(officer_id) desc
+(select o.id, count(officer_id) as complaint_count
+ from officers o
+          join complaints c on o.id = c.officer_id
+ where active = true
+ group by o.id
+ order by count(o.id) desc)
+union
+(select o.id, 0 as complaint_count
+ from officers o
+          left join complaints c on o.id = c.officer_id
+ where active = true
+   and c.officer_id is null)
+order by complaint_count desc;
